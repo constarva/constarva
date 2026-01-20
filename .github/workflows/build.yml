@@ -2,8 +2,13 @@ name: Build Vite Project
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "master"]
+  pull_request:
+    branches: ["main", "master"]
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -28,7 +33,7 @@ jobs:
           VITE_PDF_URL_AR: ${{ secrets.VITE_PDF_URL_AR }}
       
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
