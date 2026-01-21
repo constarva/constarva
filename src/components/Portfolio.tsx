@@ -227,7 +227,7 @@ export function Portfolio() {
                     <div className="mt-8 flex justify-center">
                       <Dialog>
                         <DialogTrigger asChild>
-                          <Button className="bg-accent-emerald/90 text-white hover:bg-accent-emerald rounded-full px-6 shadow-lg shadow-accent-emerald/20">
+                          <Button className="bg-accent-emerald/90 text-black dark:text-white border border-accent-emerald/40 hover:bg-accent-emerald rounded-full px-6 shadow-lg shadow-accent-emerald/20">
                             {detailsLabel}
                           </Button>
                         </DialogTrigger>
@@ -251,7 +251,18 @@ export function Portfolio() {
                                 </div>
                               )}
                             </div>
-                            <div className={`flex items-center border-t px-6 py-4 ${isRTL ? 'justify-start' : 'justify-end'}`}>
+                            <div className={`flex flex-wrap items-center gap-3 border-t px-6 py-4 ${isRTL ? 'justify-start' : 'justify-end'}`}>
+                              {(isRTL ? project.pdfUrl?.ar : project.pdfUrl?.en) && (
+                                <Button asChild variant="outline">
+                                  <a
+                                    href={isRTL ? project.pdfUrl.ar : project.pdfUrl.en}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                  >
+                                    {isRTL ? 'عرض في نافذة جديدة' : 'View in New Tab'}
+                                  </a>
+                                </Button>
+                              )}
                               <DialogClose asChild>
                                 <Button variant="outline">
                                   {isRTL ? 'إغلاق' : 'Close'}
