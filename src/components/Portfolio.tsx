@@ -1,5 +1,13 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export function Portfolio() {
@@ -17,7 +25,11 @@ export function Portfolio() {
       technology: { en: 'Machine Learning', ar: 'التعلم الآلي' },
       focus: { en: 'Data Analysis', ar: 'تحليل البيانات' },
       approach: { en: 'Full Development', ar: 'تطوير كامل' },
-      video: 'https://videos.pexels.com/video-files/7710247/7710247-uhd_2560_1440_30fps.mp4'
+      video: 'https://videos.pexels.com/video-files/7710247/7710247-uhd_2560_1440_30fps.mp4',
+      pdfUrl: {
+        en: import.meta.env.VITE_PDF_URL,
+        ar: import.meta.env.VITE_PDF_URL_AR
+      }
     },
     {
       title: { en: 'Smart Factory IoT System', ar: 'نظام إنترنت الأشياء للمصنع الذكي' },
@@ -30,7 +42,11 @@ export function Portfolio() {
       technology: { en: 'IoT Sensors', ar: 'حساسات إنترنت الأشياء' },
       focus: { en: 'Efficiency', ar: 'الكفاءة' },
       approach: { en: 'Build & Scale', ar: 'بناء وتوسيع' },
-      video: 'https://videos.pexels.com/video-files/3141207/3141207-uhd_2560_1440_25fps.mp4'
+      video: 'https://videos.pexels.com/video-files/3141207/3141207-uhd_2560_1440_25fps.mp4',
+      pdfUrl: {
+        en: import.meta.env.VITE_PDF_URL,
+        ar: import.meta.env.VITE_PDF_URL_AR
+      }
     },
     {
       title: { en: 'Cloud Infrastructure Automation', ar: 'أتمتة البنية التحتية السحابية' },
@@ -43,7 +59,11 @@ export function Portfolio() {
       technology: { en: 'Kubernetes', ar: 'كوبرنيتس' },
       focus: { en: 'Scalability', ar: 'قابلية التوسع' },
       approach: { en: 'Consulting', ar: 'استشارات' },
-      video: 'https://videos.pexels.com/video-files/5377684/5377684-uhd_2560_1440_25fps.mp4'
+      video: 'https://videos.pexels.com/video-files/5377684/5377684-uhd_2560_1440_25fps.mp4',
+      pdfUrl: {
+        en: import.meta.env.VITE_PDF_URL,
+        ar: import.meta.env.VITE_PDF_URL_AR
+      }
     },
     {
       title: { en: 'Autonomous Vehicle Fleet Management', ar: 'إدارة أسطول المركبات المستقلة' },
@@ -56,7 +76,11 @@ export function Portfolio() {
       technology: { en: 'Computer Vision', ar: 'رؤية الكمبيوتر' },
       focus: { en: 'Automation', ar: 'الأتمتة' },
       approach: { en: 'Venture Build', ar: 'بناء المشاريع' },
-      video: 'https://videos.pexels.com/video-files/8348986/8348986-uhd_2560_1440_25fps.mp4'
+      video: 'https://videos.pexels.com/video-files/8348986/8348986-uhd_2560_1440_25fps.mp4',
+      pdfUrl: {
+        en: import.meta.env.VITE_PDF_URL,
+        ar: import.meta.env.VITE_PDF_URL_AR
+      }
     },
     {
       title: { en: 'Smart Energy Grid Optimization', ar: 'تحسين شبكة الطاقة الذكية' },
@@ -69,7 +93,11 @@ export function Portfolio() {
       technology: { en: 'Smart Sensors', ar: 'المستشعرات الذكية' },
       focus: { en: 'Sustainability', ar: 'الاستدامة' },
       approach: { en: 'Full Development', ar: 'تطوير كامل' },
-      video: 'https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4'
+      video: 'https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4',
+      pdfUrl: {
+        en: import.meta.env.VITE_PDF_URL,
+        ar: import.meta.env.VITE_PDF_URL_AR
+      }
     },
     {
       title: { en: 'Healthcare AI Diagnostics', ar: 'تشخيصات الذكاء الاصطناعي الصحية' },
@@ -82,9 +110,16 @@ export function Portfolio() {
       technology: { en: 'Deep Learning', ar: 'التعلم العميق' },
       focus: { en: 'Precision', ar: 'الدقة' },
       approach: { en: 'Research & Build', ar: 'بحث وبناء' },
-      video: 'https://videos.pexels.com/video-files/7989586/7989586-uhd_2560_1440_30fps.mp4'
+      video: 'https://videos.pexels.com/video-files/7989586/7989586-uhd_2560_1440_30fps.mp4',
+      pdfUrl: {
+        en: import.meta.env.VITE_PDF_URL,
+        ar: import.meta.env.VITE_PDF_URL_AR
+      }
     }
   ]
+
+  const featuredProjects = projects.slice(0, 4)
+  const detailsLabel = isRTL ? 'تفاصيل المشروع' : 'Project Details'
 
   return (
     <section id="portfolio" className="relative py-32 bg-background overflow-hidden">
@@ -124,7 +159,7 @@ export function Portfolio() {
 
         {/* Projects Grid - Alternating Layout */}
         <div className="space-y-16">
-          {projects.map((project, index) => (
+          {featuredProjects.map((project, index) => (
             <div key={index} className="max-w-6xl mx-auto">
               <div className={`relative bg-card clean-border rounded-3xl overflow-hidden elevated-shadow group ${
                 index % 2 === 1 ? 'lg:flex-row-reverse' : ''
@@ -187,6 +222,45 @@ export function Portfolio() {
                         <span className="text-muted-foreground block">{t.portfolioFormat}</span>
                         <span className="font-medium">{isRTL ? project.approach.ar : project.approach.en}</span>
                       </div>
+                    </div>
+
+                    <div className="mt-8 flex justify-center">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button className="bg-accent-emerald/90 text-white hover:bg-accent-emerald rounded-full px-6 shadow-lg shadow-accent-emerald/20">
+                            {detailsLabel}
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-5xl w-[94vw] sm:w-[90vw] h-[80vh] p-0 overflow-hidden">
+                          <div className="flex h-full flex-col">
+                            <div className={`flex items-center justify-between gap-3 border-b px-6 py-4 ${isRTL ? 'flex-row-reverse text-right' : ''}`}>
+                              <DialogTitle className="text-base sm:text-lg font-semibold">
+                                {isRTL ? project.title.ar : project.title.en}
+                              </DialogTitle>
+                            </div>
+                            <div className="flex-1 bg-muted/20">
+                              {project.pdfUrl?.en || project.pdfUrl?.ar ? (
+                                <iframe
+                                  className="h-full w-full"
+                                  src={isRTL ? project.pdfUrl.ar : project.pdfUrl.en}
+                                  title={isRTL ? project.title.ar : project.title.en}
+                                />
+                              ) : (
+                                <div className="flex h-full items-center justify-center px-6 text-sm text-muted-foreground">
+                                  PDF URL is not set.
+                                </div>
+                              )}
+                            </div>
+                            <div className={`flex items-center border-t px-6 py-4 ${isRTL ? 'justify-start' : 'justify-end'}`}>
+                              <DialogClose asChild>
+                                <Button variant="outline">
+                                  {isRTL ? 'إغلاق' : 'Close'}
+                                </Button>
+                              </DialogClose>
+                            </div>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                     </div>
                   </div>
                 </div>
